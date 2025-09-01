@@ -1,0 +1,42 @@
+name: Build
+run-name: Build the entire VS solution.
+
+permissions:
+  contents: read
+
+on:
+  push:
+    paths:
+      - '.github/workflows/build.yml' # React to the workflow file itself changing
+      - 'src/**' # React to the source files changing
+
+  workflow_dispatch: # Allow manual runs
+
+jobs:
+  build:
+    name: Build the entire VS solution.
+    runs-on: ubuntu-latest
+
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+    steps:
+      - name: Install the .NET workflow.
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9
+
+      - name: Checkout repository.
+        uses: actions/checkout@v4
+
+      - name: Ensure playground project exists so that the full solution build doesn't fail.
+        run: dotnet new console -o src/local/Playground
+
+      - name: Build the project with the debug configuration.
+        working-directory: src
+        run: dotnet build --configuration debug
+
+      - name: Build the project with the release configuration.
+        working-directory: src
+        run: dotnet build --configuration release

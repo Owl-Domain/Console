@@ -1,0 +1,42 @@
+name: Tests
+run-name: Run the project tests.
+
+permissions:
+  contents: read
+
+on:
+  push:
+    paths:
+      - '.github/workflows/test.yml' # React to the workflow file itself changing
+      - 'src/**' # React to the source files changing
+
+  workflow_dispatch: # Allow manual runs
+
+jobs:
+  test:
+    name: Run the project tests.
+    runs-on: ubuntu-latest
+
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+    steps:
+      - name: Install the .NET workflow.
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9
+
+      - name: Checkout repository.
+        uses: actions/checkout@v4
+
+      - name: Ensure playground project exists so that the solution build doesn't fail.
+        run: dotnet new console -o src/local/Playground
+
+      - name: Run the project tests with the debug configuration.
+        working-directory: src
+        run: dotnet test --configuration debug
+
+      - name: Run the project tests with the release configuration.
+        working-directory: src
+        run: dotnet test --configuration release

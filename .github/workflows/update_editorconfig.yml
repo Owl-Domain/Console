@@ -1,0 +1,53 @@
+name: update .editorconfig file
+run-name: Update the .editorconfig file to match the latest OwlDomain version.
+
+permissions:
+  contents: write
+
+on:
+  push:
+    paths: 
+      - '.github/workflows/update_editorconfig.yml' # React to the workflow file itself changing
+  schedule:
+    - cron: "0 0 * * *" # Maybe it'll work ok enough
+  workflow_dispatch: # Allow manual run because permissions for dispatch events suck
+
+jobs:
+  update_editorconfig:
+    runs-on: ubuntu-latest
+    name: Updating the .editorconfig file from the Owl-Domain/editorconfig repository.
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Pull the latest .editorconfig file
+        run: wget --output-document .editorconfig 'https://raw.githubusercontent.com/Owl-Domain/editorconfig/refs/heads/master/.editorconfig'
+
+      - name: Stage the pulled .editorconfig file
+        run: git add .editorconfig
+
+      - name: Check if the pulled .editorconfig file actually changed
+        id: check_changes
+        run: |
+          if [[ -z $(git status -s) ]]; then
+            echo "The .editorconfig file has not changed, git commit will be skipped."
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "The .editorconfig file has changed."
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Configure git information
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Create the commit with the new .editorconfig file
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: git commit -m "* Updated the .editorconfig file."
+
+      - name: Push the new commit
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: git push
