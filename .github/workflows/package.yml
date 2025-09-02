@@ -1,0 +1,65 @@
+name: Build package
+run-name: Build the NuGet packages.
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: master
+    paths:
+      - '.github/workflows/package.yml' # React to the workflow file itself changing
+      - 'src/**' # React to the source files changing
+
+  workflow_dispatch: # Allow manual runs
+
+jobs:
+  build_packages:
+    runs-on: ubuntu-latest
+    name: Building the latest NuGet packages
+
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+    steps:
+      - name: Install the .NET workflow.
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9
+
+      - name: Checkout repository.
+        uses: actions/checkout@v4
+
+      - name: Ensure playground project exists so that the full solution build doesn't fail.
+        run: dotnet new console -o src/local/Playground
+
+      - name: Build the project with the release configuration.
+        working-directory: src
+        run: dotnet build --configuration release
+
+      - name: Ensure that the project tests pass.
+        working-directory: src
+        run: dotnet test --configuration release
+
+      - name: Create the NuGet packages.
+        working-directory: src
+        run: dotnet pack --configuration release --no-build --output ../package_output
+
+        # Easier to just let it build along with all the other packages
+      - name: Remove the uncessary Playground project NuGet package
+        run: rm -f package_output/Playground*
+
+      - name: Upload the built NuGet packages as a build artifact.
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: package_output
+          if-no-files-found: error
+          retention-days: 1
+
+        # Packages with the same version will be skipped so it's safe to do this on every push.
+      - name: Upload the built NuGet packages to nuget.org.
+        run: dotnet nuget push package_output/*.nupkg -k $NUGET_TOKEN -s https://api.nuget.org/v3/index.json --skip-duplicate
+        env:
+            NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}

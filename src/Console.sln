@@ -22,6 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		..\.github\workflows\build.yml = ..\.github\workflows\build.yml
 		..\.github\workflows\test.yml = ..\.github\workflows\test.yml
 		..\.github\workflows\update_editorconfig.yml = ..\.github\workflows\update_editorconfig.yml
+		..\.github\workflows\package.yml = ..\.github\workflows\package.yml
 	EndProjectSection
 EndProject
 Global

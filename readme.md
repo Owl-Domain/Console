@@ -2,11 +2,18 @@
 
 [![Build](https://github.com/Owl-Domain/Console/actions/workflows/build.yml/badge.svg)](https://github.com/Owl-Domain/Console/actions/workflows/build.yml)
 [![Test](https://github.com/Owl-Domain/Console/actions/workflows/test.yml/badge.svg)](https://github.com/Owl-Domain/Console/actions/workflows/test.yml)
+[![Package](https://github.com/Owl-Domain/Console/actions/workflows/package.yml/badge.svg)](https://github.com/Owl-Domain/Console/actions/workflows/package.yml)
 
 ---
 
 `OwlDomain.Console` is a project to create several different libraries *(and some frameworks)*
 for providing console *(terminal)* related functionality.
+
+
+## Development
+
+Currently this project is being developed on the `develop` branch, changes will be
+merged to `master` *(the default branch)* whenever there is a package update.
 
 
 ## Contributions
