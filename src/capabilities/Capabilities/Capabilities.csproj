@@ -18,6 +18,11 @@
 		<ProjectReference Include="../Capabilities.Abstractions/Capabilities.Abstractions.csproj" />
 	</ItemGroup>
 
+	<!-- Package references -->
+	<ItemGroup Label="packages">
+		<PackageReference Include="OwlDomain.Common" Version="1.5.1" />
+	</ItemGroup>
+
 	<!-- NuGet package -->
 	<PropertyGroup Label="nuget">
 		<IncludeSymbols>true</IncludeSymbols>
