@@ -10,7 +10,8 @@ public interface ITerminalCapability
 	string Id { get; }
 
 	/// <summary>A user friendly name of the capability.</summary>
-	string FriendlyName { get; }
+	/// <remarks>If a friendly name doesn't exist then the <see cref="Id"/> should be used instead.</remarks>
+	string? FriendlyName { get; }
 
 	/// <summary>The value of the capability.</summary>
 	object? Value { get; }

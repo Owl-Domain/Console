@@ -7,6 +7,7 @@ namespace OwlDomain.Console.Capabilities;
 public sealed class TerminalCapabilityInfo : ITerminalCapabilityInfo
 {
 	#region Fields
+	[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 	private readonly Dictionary<string, ITerminalCapability> _capabilities = [];
 	#endregion
 
@@ -59,7 +60,7 @@ public sealed class TerminalCapabilityInfo : ITerminalCapabilityInfo
 		const string typeName = nameof(TerminalCapabilityInfo);
 		const string countName = nameof(Count);
 
-		return $"{typeName} {{ {countName} = ({Count:n0]}) }}";
+		return $"{typeName} {{ {countName} = ({Count:n0}) }}";
 	}
 	#endregion
 }

@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace OwlDomain.Console.Capabilities;
 
 /// <summary>
@@ -35,7 +37,7 @@ public class TerminalCapability<T> : ITerminalCapability<T>
 	public string Id { get; }
 
 	/// <inheritdoc/>
-	public string FriendlyName { get; }
+	public string? FriendlyName { get; }
 
 	/// <inheritdoc/>
 	public T Value { get; }
@@ -59,7 +61,7 @@ public class TerminalCapability<T> : ITerminalCapability<T>
 		friendlyName.ThrowIfEmptyOrWhitespace(nameof(friendlyName));
 
 		Id = id;
-		FriendlyName = friendlyName ?? id;
+		FriendlyName = friendlyName;
 		Value = value;
 	}
 	#endregion
@@ -69,10 +71,40 @@ public class TerminalCapability<T> : ITerminalCapability<T>
 	private string DebuggerDisplay()
 	{
 		const string typeName = nameof(TerminalCapability<T>);
+		const string idName = nameof(Id);
 		const string friendlyNameName = nameof(FriendlyName);
 		const string valueName = nameof(Value);
 
-		return $"{typeName} {{ {friendlyNameName} = ({FriendlyName}), {valueName} = ({Value}) }}";
+		object? value = Value is string str ? EscapeString(str) : Value;
+
+		if (FriendlyName is not null)
+			return $"{typeName} {{ {idName} = ({Id}), {friendlyNameName} = ({FriendlyName}), {valueName} = ({value}) }}";
+
+		return $"{typeName} {{ {idName} = ({Id}), {valueName} = ({value}) }}";
+	}
+	private static string EscapeString(string value)
+	{
+		StringBuilder builder = new();
+		builder.Append('"');
+
+		foreach (char ch in value)
+		{
+			if (ch is '\e') builder.Append(@"\e");
+			else if (ch is '\a') builder.Append(@"\a");
+			else if (ch is '\r') builder.Append(@"\r");
+			else if (ch is '\n') builder.Append(@"\n");
+			else if (ch is '\f') builder.Append(@"\f");
+			else if (ch is '\b') builder.Append(@"\b");
+			else if (ch is '\v') builder.Append(@"\v");
+			else if (ch is '\t') builder.Append(@"\t");
+			else if (ch is '"') builder.Append("\\\"");
+			else if (ch is '\\') builder.Append(@"\\");
+			else builder.Append(ch);
+		}
+
+		builder.Append('"');
+
+		return builder.ToString();
 	}
 	#endregion
 }
