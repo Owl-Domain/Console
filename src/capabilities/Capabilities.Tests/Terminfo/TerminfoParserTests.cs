@@ -23,6 +23,7 @@ public sealed class TerminfoParserTests
 	#endregion
 
 	#region Helpers
+	[ExcludeFromCodeCoverage]
 	public static string GetTerminfoFileName(MethodInfo _, object[] data)
 	{
 		Debug.Assert(data.Length is 1);
@@ -31,6 +32,8 @@ public sealed class TerminfoParserTests
 
 		return $"/{name[0]}/{name}";
 	}
+
+	[ExcludeFromCodeCoverage]
 	private static IEnumerable<object?[]> GetValidTerminfoFiles()
 	{
 		const string relativeDirectory = @"../../../Terminfo/valid_files/";

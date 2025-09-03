@@ -162,6 +162,7 @@ public static partial class TerminfoParser
 		for (int i = 0; i < booleans.Length; i++)
 		{
 			bool? value = booleans[i];
+
 			if (value is not true)
 				continue;
 
@@ -176,6 +177,7 @@ public static partial class TerminfoParser
 		for (int i = 0; i < numbers.Length; i++)
 		{
 			int value = numbers[i];
+
 			if (value is -1 or -2)
 				continue;
 
@@ -192,7 +194,6 @@ public static partial class TerminfoParser
 			int valueIndex = strings[i];
 			if (valueIndex is -1 or -2)
 				continue;
-
 
 			short nameIndex = names[runningOffset++];
 			string name = table[nameOffset + nameIndex];
@@ -286,15 +287,15 @@ public static partial class TerminfoParser
 	}
 	private static bool? ReadBooleanCapability(this BinaryReader reader)
 	{
-		byte value = reader.ReadByte();
+		sbyte value = reader.ReadSByte();
 
 		return value switch
 		{
 			0 => false,
 			1 => true,
-			254 => null,
+			-1 or -2 => null,
 
-			_ => Throw.New.InvalidOperationException<bool>($"Unknown boolean value, expected either 0, 1 or 254 (for -2).")
+			_ => Throw.New.InvalidOperationException<bool>($"Unknown boolean value, expected either 0, 1, -1 or -2.")
 		};
 	}
 	private static int ReadNumberCapability(this BinaryReader reader, Format format)
