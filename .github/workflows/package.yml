@@ -55,7 +55,7 @@ jobs:
         with:
           name: nuget-packages
           path: package_output
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 1
 
         # Packages with the same version will be skipped so it's safe to do this on every push.
