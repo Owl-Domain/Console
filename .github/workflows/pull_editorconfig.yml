@@ -1,5 +1,9 @@
 name: Pull the latest OwlDomain .editorconfig file
 
+permissions:
+  contents: write
+  pull-requests: write
+
 on:
   repository_dispatch:
     types: [editorconfig-update]
