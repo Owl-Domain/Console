@@ -1,12 +1,13 @@
-name: Pull the latest OwlDomain .editorconfig file
+name: Update .editorconfig file
 
 permissions:
   contents: write
   pull-requests: write
 
 on:
-  repository_dispatch:
+  repository_dispatch: # React to update event
     types: [editorconfig-update]
+  workflow_dispatch: # Allow manual runs
 
 jobs:
   pull_editorconfig:
