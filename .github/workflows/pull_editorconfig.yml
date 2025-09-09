@@ -1,0 +1,9 @@
+name: Pull the latest OwlDomain .editorconfig file
+
+on:
+  repository_dispatch:
+    types: [editorconfig-update]
+
+jobs:
+  pull_editorconfig:
+    uses: Owl-Domain/editorconfig/.github/workflows/pull_editorconfig.yml@master
