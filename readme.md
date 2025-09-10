@@ -1,8 +1,15 @@
 # OwlDomain.Console
 
-[![Build](https://github.com/Owl-Domain/Console/actions/workflows/build.yml/badge.svg)](https://github.com/Owl-Domain/Console/actions/workflows/build.yml)
-[![Test](https://github.com/Owl-Domain/Console/actions/workflows/test.yml/badge.svg)](https://github.com/Owl-Domain/Console/actions/workflows/test.yml)
-[![Package](https://github.com/Owl-Domain/Console/actions/workflows/package.yml/badge.svg)](https://github.com/Owl-Domain/Console/actions/workflows/package.yml)
+<!-- Do not put the link/image nested tags on new lines as that will count the links as having whitespace which changes the rendering -->
+<p align="center"> <!-- Project -->
+  <a title="A link to the Github action workflow for building the project." href="https://github.com/Owl-Domain/Console/actions/workflows/build.yml"><img alt="Status badge of the Github action workflow for building the project." src="https://github.com/Owl-Domain/Console/actions/workflows/build.yml/badge.svg"></a>
+  <a title="A link to the Github action workflow for testing the project." href="https://github.com/Owl-Domain/Console/actions/workflows/test.yml"><img alt="Status badge of the Github action workflow for testing the project." src="https://github.com/Owl-Domain/Console/actions/workflows/test.yml/badge.svg"></a>
+  <a title="A link to the Github action workflow for creating NuGet packages." href="https://github.com/Owl-Domain/Console/actions/workflows/package.yml"><img alt="Status badge of the Github action workflow for creating Nuget packages." src="https://github.com/Owl-Domain/Console/actions/workflows/package.yml/badge.svg"></a>
+</p>
+
+<p align="center"> <!-- Organisation -->
+  <a title="A link to the OwlDomain Discord server." href="https://discord.gg/JtXMeqVGQc"><img alt="Status badge for the OwlDomain discord server." src="https://img.shields.io/discord/1411024983550853162?style=social&logo=discord&label=discord&link=https%3A%2F%2Fdiscord.gg%2FJtXMeqVGQc"></a>
+</p>
 
 ---
 
