@@ -1,10 +1,12 @@
 # OwlDomain.Console
 
 <!-- Do not put the link/image nested tags on new lines as that will count the links as having whitespace which changes the rendering -->
+
 <p align="center"> <!-- Project -->
-  <a title="A link to the Github action workflow for building the project." href="https://github.com/Owl-Domain/Console/actions/workflows/build.yml"><img alt="Status badge of the Github action workflow for building the project." src="https://github.com/Owl-Domain/Console/actions/workflows/build.yml/badge.svg"></a>
-  <a title="A link to the Github action workflow for testing the project." href="https://github.com/Owl-Domain/Console/actions/workflows/test.yml"><img alt="Status badge of the Github action workflow for testing the project." src="https://github.com/Owl-Domain/Console/actions/workflows/test.yml/badge.svg"></a>
-  <a title="A link to the Github action workflow for creating NuGet packages." href="https://github.com/Owl-Domain/Console/actions/workflows/package.yml"><img alt="Status badge of the Github action workflow for creating Nuget packages." src="https://github.com/Owl-Domain/Console/actions/workflows/package.yml/badge.svg"></a>
+  <a title="A link to the Github action workflow for building the project." href="https://github.com/Owl-Domain/Console/actions/workflows/build.yml"><img alt="A status badge of the Github action workflow for building the project." src="https://github.com/Owl-Domain/Console/actions/workflows/build.yml/badge.svg"></a>
+  <a title="A link to the Github action workflow for testing the project." href="https://github.com/Owl-Domain/Console/actions/workflows/test.yml"><img alt="A status badge of the Github action workflow for testing the project." src="https://github.com/Owl-Domain/Console/actions/workflows/test.yml/badge.svg"></a>
+  <a title="A link to the Github action workflow for linting the project." href="https://github.com/Owl-Domain/Console/actions/workflows/lint.yml"><img alt="A status badge of the Github action workflow for linting the project." src="https://github.com/Owl-Domain/Console/actions/workflows/lint.yml/badge.svg"></a>
+  <a title="A link to the Github action workflow for publishing the project." href="https://github.com/Owl-Domain/Console/actions/workflows/publish.yml"><img alt="A status badge of the Github action workflow for publishing the project." src="https://github.com/Owl-Domain/Console/actions/workflows/publish.yml/badge.svg"></a>
 </p>
 
 <p align="center"> <!-- Organisation -->
@@ -20,7 +22,7 @@ for providing console *(terminal)* related functionality.
 ## Development
 
 Currently this project is being developed on the `develop` branch, changes will be
-merged to `master` *(the default branch)* whenever there is a package update.
+merged to `main` *(the default branch)* whenever there is a package update.
 
 
 ## Contributions
@@ -34,4 +36,4 @@ concern / suggestion has already been raised.
 ## License
 
 This project (the source, the release files, e.t.c) is released under the
-[OwlDomain License](https://github.com/Owl-Domain/Console/blob/master/license.md).
+[OwlDomain License](https://github.com/Owl-Domain/Console/blob/main/license.md).

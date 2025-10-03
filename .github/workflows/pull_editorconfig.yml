@@ -1,4 +1,4 @@
-name: Update .editorconfig file
+name: update .editorconfig
 
 permissions:
   contents: write
@@ -11,4 +11,4 @@ on:
 
 jobs:
   pull_editorconfig:
-    uses: Owl-Domain/editorconfig/.github/workflows/pull_editorconfig.yml@master
+    uses: Owl-Domain/editorconfig/.github/workflows/pull_editorconfig.yml@main

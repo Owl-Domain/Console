@@ -1,0 +1,32 @@
+name: publish
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ensure_release:
+    runs-on: ubuntu-latest
+    name: Ensure that a release exists.
+
+    steps:
+      - name: Ensure workflow run is happening for a tag.
+        if: ${{ github.ref_type != 'tag' }}
+        run: |
+          echo "Workflowing is running for a '${{ github.ref_type }}' ref instead of a tag."
+          exit 1
+
+      - name: Check that the release exists.
+        run: gh release view --repo ${{ github.repositoryUrl }} ${{ github.ref_name }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish_packages:
+    needs: ensure_release
+    uses: Owl-Domain/.github/.github/workflows/dotnet_package_publish.yml@main
+    secrets:
+      NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
+    with:
+      tag-name: ${{ github.ref_name }}

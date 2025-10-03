@@ -1,0 +1,15 @@
+name: lint
+
+permissions:
+  contents: read
+
+on:
+  push:
+    paths:
+      - 'src/**' # React to source files changing
+
+  workflow_dispatch: # Allow manual runs
+
+jobs:
+  lint:
+    uses: Owl-Domain/.github/.github/workflows/dotnet_lint.yml@main
